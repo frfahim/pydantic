@@ -51,7 +51,6 @@ dependencies = [
     "typing-extensions>=4.12.2",
     'annotated-types>=0.6.0',
     "pydantic-core==2.25.0",
-    "example-plugin",
 ]
 dynamic = ['version', 'readme']
 
@@ -119,7 +118,7 @@ docs = [
     "mike",
     "pytest-examples>=0.0.13",
     "pydantic-settings>=2.0b1",
-    "pydantic-extra-types @ git+https://github.com/pydantic/pydantic-extra-types.git@main",
+    "pydantic-extra-types>=2.9.0",
     "requests",
 ]
 linting = [
@@ -138,8 +137,7 @@ testing = [
     "pytest-examples",
     "faker>=18.13.0",
     "pytest-benchmark>=4.0.0",
-    # TODO: remove bound once pytest-codspeed supports 3.13, blocked by `python-cffi`
-    "pytest-codspeed~=2.2.0; python_version < '3.13'",
+    "pytest-codspeed~=2.2.0",
     "packaging>=23.2",
     "jsonschema>=4.23.0",
 ]
@@ -148,8 +146,7 @@ testing-extra = [
     "ansi2html",
     "devtools",
     # used in docs tests
-    # TODO: remove bound once sqlalchemy supports 3.13
-    "sqlalchemy>=2.0,<3.0; python_version < '3.13'",
+    "sqlalchemy>=2.0,<3.0",
     "greenlet>=3.0.0rc3; python_version < '3.13'",
 ]
 mypy = [
@@ -163,6 +160,7 @@ all = [
   { include-group = "docs" },
   { include-group = "linting" },
   { include-group = "testing" },
+  { include-group = "testing-extra" },
   { include-group = "mypy" },
   { include-group = "memray" },
 ]
@@ -275,7 +273,7 @@ strict = ['tests/test_pipeline.py']
 enableExperimentalFeatures = true
 
 [tool.codespell]
-skip = '.git,env*,pydantic/v1/*'
+skip = '.git,env*,pydantic/v1/*,uv.lock'
 # `ser` - abbreviation for "ser"ialisation
 # `crate` - a rust crate
 ignore-words-list = 'gir,ser,crate'
@@ -286,6 +284,3 @@ tests-root = "tests"
 test-framework = "pytest"
 ignore-paths = []
 formatter-cmd = ["ruff check --exit-zero --fix $file", "ruff format $file"]
-
-[tool.uv.sources]
-example-plugin = { path = "tests/plugin" }
