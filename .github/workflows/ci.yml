@@ -234,11 +234,13 @@ jobs:
       with:
         enable-cache: true
 
-    - name: Set up Python ${{ matrix.python-version }}
-      run: uv python install ${{ matrix.python-version }}
+    # - name: Set up Python ${{ matrix.python-version }}
+    #   run: uv python install ${{ matrix.python-version }}
 
     - name: install deps
-      run: uv sync --group testing --group mypy --frozen
+      run: |
+        uv venv --python ${{ matrix.python-version }}
+        uv sync --group testing --group mypy --frozen
 
     - name: install mypy
       if: steps.cache.outputs.cache-hit != 'true'
