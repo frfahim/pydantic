@@ -306,7 +306,7 @@ jobs:
           pattern: coverage-*
           path: coverage
 
-      - run: uv pip install coverage[toml]
+      - run: pip install coverage[toml]
 
       - run: ls -la coverage
       - run: coverage combine coverage
