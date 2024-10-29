@@ -234,9 +234,6 @@ jobs:
       with:
         enable-cache: true
 
-    # - name: Set up Python ${{ matrix.python-version }}
-    #   run: uv python install ${{ matrix.python-version }}
-
     - name: install deps
       run: |
         uv venv --python ${{ matrix.python-version }}
@@ -373,11 +370,10 @@ jobs:
       with:
         enable-cache: true
 
-    - name: Set up Python ${{ matrix.python-version }}
-      run: uv python install ${{ matrix.python-version }}
-
     - name: install deps
-      run: uv sync --group testing
+      run: |
+        uv venv --python ${{ matrix.python-version }}
+        uv sync --group testing
 
     - name: install typing-extensions
       run: uv pip install 'typing-extensions @ git+https://github.com/python/typing_extensions.git'
