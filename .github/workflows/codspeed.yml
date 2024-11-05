@@ -16,13 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-python@v3
+        with:
+          python-version: "3.12"
+
       - name: Setup uv
         uses: astral-sh/setup-uv@v3
         with:
           enable-cache: true
 
       - name: install deps
-        run: uv sync --python 3.12 --group testing --group testing-extra --extra email --frozen
+        run: uv sync --extra email --group testing --group testing-extra
 
       - name: Run CodSpeed benchmarks
         uses: CodSpeedHQ/action@v3
