@@ -114,7 +114,7 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       DEPS: yes
-      UV_PYTHON_PREFERENCE: managed
+      UV_PYTHON_PREFERENCE: only-managed
 
     runs-on: ${{ matrix.os }}
 
