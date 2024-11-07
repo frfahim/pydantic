@@ -114,6 +114,7 @@ jobs:
     env:
       OS: ${{ matrix.os }}
       DEPS: yes
+      UV_PYTHON_PREFERENCE: managed
 
     runs-on: ${{ matrix.os }}
 
@@ -124,9 +125,6 @@ jobs:
       uses: astral-sh/setup-uv@v3
       with:
         enable-cache: true
-
-    - name: Set up Python ${{ matrix.python-version }}
-      run: uv python install ${{ matrix.python-version }}
 
     - name: install deps
       run: uv sync --python ${{ matrix.python-version }} --group testing --extra timezone
